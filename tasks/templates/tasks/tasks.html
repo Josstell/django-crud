@@ -10,16 +10,19 @@
 
     {% for task in tasks %}
     <li>
+      <a href="{% url 'task_detail' task.id %}">
         {% if task.important %}
-
+        
         <h1>{{ task.title }}</h1>
-
+        
         {% else %}
         <h5>{{ task.title }}</h5>
         
         {% endif %}
         <p>{{ task.description }}</p>
         <p>{{ task.user.username }}</p>
+      </a>
+
     </li>
     
     {% endfor %}
