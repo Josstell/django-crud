@@ -3,15 +3,23 @@
 
 {% block content %}
 
-<h2>Create task</h2>
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
 
-{{error}}
+            <h2>Create task</h2>
+            
+            {{error}}
+            
+            <form method="POST" action="/tasks/create/" class="card card-body">
+            {% csrf_token %}
+                {{ form.as_p }}
+                <button>Save</button>
+            
+            </form>
+        </div>
+    </div>
+</main>
 
-<form method="POST" action="/tasks/create/">
-{% csrf_token %}
-    {{ form.as_p }}
-    <button>Save</button>
-
-</form>
 
 {% endblock %}
