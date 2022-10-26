@@ -21,6 +21,7 @@
         {% endif %}
         <p>{{ task.description }}</p>
         <p>{{ task.user.username }}</p>
+        <p>{{ task.datecomplete|date:'m j Y:i' }}</p>
       </a>
 
     </li>

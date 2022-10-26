@@ -45,6 +45,12 @@ def tasks(request):
     return render(request, 'tasks/tasks.html', {'tasks': tasks})
 
 
+def tasks_completed(request):
+    tasks = Task.objects.filter(
+        user=request.user, datecomplete__isnull=False).order_by('datecomplete')
+    return render(request, 'tasks/tasks.html', {'tasks': tasks})
+
+
 def create_task(request):
     if request.method == 'GET':
         return render(request, 'tasks/create_task.html', {'form': TaskForm})
