@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from .forms import TaskForm
 from .models import Task
+from django.utils import timezone
 
 # Create your views here.
 
@@ -59,6 +60,21 @@ def create_task(request):
                 'form': AuthenticationForm,
                 'error': "Please provide valide data"
             })
+
+
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.datecomplete = timezone.now()
+        task.save()
+        return redirect('tasks')
+
+
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.delete()
+        return redirect('tasks')
 
 
 def task_detail(request, task_id):
